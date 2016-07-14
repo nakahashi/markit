@@ -1,0 +1,84 @@
+html, body {
+  height:100%;
+  margin:0;
+}
+
+.fix-height {
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.fix-width {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+$color-button-font: #A5A5A5;
+$color-hover-button-font: #000;
+$color-editor-font: #000;
+
+// おおおお。色考えるの面倒くさいぜ。。
+// でもさすがにMSそのままだとまずい？
+$color-yellow-header: #F8F7B6;
+$color-yellow-editor: #FDFCC1;
+
+.post {
+  padding: 30px 0 0px;
+  margin: 0;
+  overflow: hidden;
+  &:hover .header {
+    color: $color-button-font;
+  }
+}
+
+.theme-yellow-header {
+  background-color: $color-yellow-header;
+  color: $color-yellow-header;
+}
+
+.theme-yellow-editor {
+  background-color: $color-yellow-editor;
+}
+
+.header {
+  background-color: $color-yellow-header;
+  -webkit-app-region: drag;
+  height: 30px;
+  padding-top: 8px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: $color-yellow-header;
+  &:hover {
+    color: $color-button-font;
+  }
+}
+
+.dragholl {
+  -webkit-app-region: no-drag;
+}
+
+.header-button {
+  &:hover {
+    color: $color-hover-button-font;
+  }
+}
+
+.remove-icon {
+  padding-top: 2px;
+}
+
+.body {
+  height: 100%;
+}
+
+#editor {
+  background-color: $color-yellow-editor;
+  resize: none;
+  border: none;
+  padding: 8px;
+  color: $color-editor-font;
+  font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+}
+
+textarea:focus { outline:none; }
