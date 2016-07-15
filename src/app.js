@@ -29,7 +29,11 @@ app.on('ready', () => {
 
   _post.start(status);
 
-  _createTrayIcon();
+  if (process.platform === 'darwin') {
+    _createMenu();
+  } else {
+    _createTrayMenu();
+  }
 
   _watcher = chokidar.watch(_post.folder, {ignoreInitial: true});
   _watcher.on('add', _post.open.bind(_post));
@@ -44,7 +48,44 @@ app.on('window-all-closed', () => {});
 
 ipcMain.on('add-post', () => _post.add());
 
-function _createTrayIcon() {
+function _createMenu() {
+  const menuTemplate = [
+    {
+      label: app.getName(),
+      submenu: [
+        { label: '付箋フォルダ指定...', click: ()=> {
+          const options = {
+            title: '付箋フォルダを選択してください。',
+            properties: ['openDirectory']
+          };
+          const directories = dialog.showOpenDialog(options);
+          if (directories && directories[0]) {
+            _watcher.close();
+
+            _post.changeFolder(directories[0]);
+            _watcher = chokidar.watch(_post.folder, {ignoreInitial: true});
+            _watcher.on('add', _post.open.bind(_post));
+          }
+        }},
+        { label: '付箋フォルダを開く', click: ()=> {
+          shell.openItem(_post.folder);
+        }},
+        { label: '終了', accelerator: 'Cmd+Q', click: app.quit }
+      ]
+    },
+    {
+      label: 'ファイル',
+      submenu: [
+        { label: '新しい付箋', click: _post.add.bind(_post) }
+      ]
+    },
+  ];
+
+  const menu = Menu.buildFromTemplate(menuTemplate);
+  Menu.setApplicationMenu(menu);
+}
+
+function _createTrayMenu() {
   const menuTemplate = [
     { label: '新しい付箋', click: _post.add.bind(_post) },
     { label: '付箋フォルダ指定...', click: ()=> {
@@ -67,7 +108,8 @@ function _createTrayIcon() {
     { label: '終了', click: app.quit }
   ];
 
+  const menu = Menu.buildFromTemplate(menuTemplate);
   const trayIcon = new Tray(`${__dirname}/../icons/tag-32.png`);
-  trayIcon.setContextMenu(Menu.buildFromTemplate(menuTemplate));
+  trayIcon.setContextMenu(menu);
   trayIcon.setToolTip(app.getName());
 }
