@@ -1,10 +1,9 @@
-import {ipcRenderer} from 'electron';
-import remote from 'remote';
+import {ipcRenderer, remote} from 'electron';
+import {Grid, Row, Col} from 'react-bootstrap';
 import fs from 'fs';
 import chokidar from 'chokidar';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Grid, Row, Col} from 'react-bootstrap';
 
 class Post extends React.Component {
   constructor(props) {
