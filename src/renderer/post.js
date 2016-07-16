@@ -25,6 +25,9 @@ class Post extends React.Component {
   componentDidMount() {
     ::this.handleFileUpdate();
     chokidar.watch(this.path).on('change', ::this.handleFileUpdate);
+    chokidar.watch(this.path).on('unlink', () => {
+      remote.getCurrentWindow().close();
+    });
 
     window.addEventListener('resize', ::this.handleResize);
     this.height = window.innerHeight;

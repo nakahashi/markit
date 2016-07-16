@@ -79,6 +79,31 @@ function _createMenu() {
         { label: '新しい付箋', accelerator: 'Cmd+N', click: _post.add.bind(_post) }
       ]
     },
+    {
+      label: "編集",
+      submenu: [
+        {
+          label: "コピー",
+          accelerator: "CmdOrCtrl+C",
+          role: "copy"
+        },
+        {
+          label: "ペースト",
+          accelerator: "CmdOrCtrl+V",
+          role: "paste"
+        },
+        {
+          label: "カット",
+          accelerator: "CmdOrCtrl+X",
+          role: "cut"
+        },
+        {
+          label: "すべて選択",
+          accelerator: "CmdOrCtrl+A",
+          role: "selectall",
+        }
+      ]
+    }
   ];
 
   const menu = Menu.buildFromTemplate(menuTemplate);

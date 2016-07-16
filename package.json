@@ -5,11 +5,12 @@
   "main": "lib/app.js",
   "scripts": {
     "start": "electron . --enable-logging",
-    "build": "gulp",
+    "build": "gulp build:prod",
     "server": "gulp server",
     "watch": "gulp watch",
     "pac": "electron-packager . markit --out=lib/bin overwrite=true --platform=darwin --arch=x64 --icon=icons/note.icns --overwrite --prune=true",
-    "clean": "rm -rf lib",
+    "package": "gulp package",
+    "clean": "gulp clean",
     "test": "mocha --compilers js:babel-register test/**/*.js"
   },
   "author": "nakahashi",
@@ -26,10 +27,12 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.0.1",
     "chai": "^3.5.0",
+    "del": "^2.2.1",
     "electron-connect": "^0.4.2",
     "electron-packager": "^7.3.0",
-    "electron-prebuilt": "^1.2.7",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.2",
     "gulp-plumber": "^1.0.1",
@@ -37,9 +40,11 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-watch": "^4.3.5",
     "mocha": "^2.5.3",
-    "spectron": "^3.2.6"
+    "spectron": "^3.2.6",
+    "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
+    "electron-prebuilt": "^1.2.7",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-bootstrap": "^0.29.5",
