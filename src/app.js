@@ -76,7 +76,7 @@ function _createMenu() {
     {
       label: 'ファイル',
       submenu: [
-        { label: '新しい付箋', click: _post.add.bind(_post) }
+        { label: '新しい付箋', accelerator: 'Cmd+N', click: _post.add.bind(_post) }
       ]
     },
   ];

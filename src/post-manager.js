@@ -127,7 +127,7 @@ export default class PostManager {
 
   add() {
     const fullPath = _getNewFullPath(this.folder);
-    fs.writeFileSync(fullPath, fullPath);
+    fs.writeFileSync(fullPath, "");
   }
 }
 

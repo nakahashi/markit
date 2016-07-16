@@ -9,6 +9,12 @@ import electronConnect from 'electron-connect';
 const js = './src/**/*.js';
 const scss = './src/**/*.scss';
 const html = './src/**/*.html';
+const pacagejson = './package.json';
+
+gulp.task('package.json', () => {
+  return gulp.src(pacagejson)
+    .pipe(gulp.dest('./lib/'));
+});
 
 gulp.task('js', () => {
   return gulp.src(js)
@@ -32,7 +38,8 @@ gulp.task('html', () => {
     .pipe(gulp.dest('./lib/'));
 });
 
-gulp.task('continuous:watch', ['js', 'html', 'scss'], () => {
+gulp.task('continuous:watch', ['js', 'html', 'scss', 'package.json'], () => {
+  watch([pacagejson], () => gulp.start('package.json'));
   watch([js], () => gulp.start('js'));
   watch([html], () => gulp.start('html'));
   watch([scss], () => gulp.start('scss'));
@@ -47,5 +54,4 @@ gulp.task('server', ['watch'], () => {
 });
 
 gulp.task('watch', ['continuous:watch']);
-gulp.task('default', ['js', 'html', 'scss']);
-
+gulp.task('default', ['js', 'html', 'scss', 'package.json']);
