@@ -10,9 +10,7 @@ markitはデスクトップに付箋を張り付けられるアプリケーシ�
 
 付箋をMarkdownフォーマットで作成すると、編集はプレーンテキスト、編集時以外はMarkdownプレビューで表示できます。
 
-同期用のフォルダに画像ファイルを置くと、画像を表示する付箋を作成できます。
-
-markitはWindows、Mac、Linuxで動作します。
+markitはWindows、Macで動作します。
 
 目下開発中です…
 
@@ -24,28 +22,11 @@ markitはWindows、Mac、Linuxで動作します。
 
 ## フォント設定
 
-## フォーマット判定
-
- * 画像系の拡張子 → 'img'
- * utf8:拡張子が'md' → 'md'
- * utf8で上記以外 → 'txt'
-
-## 画像プレビュー
-
 ## Markdownプレビュー
 
  * md2reactを使う
 
 ## ズーム
-
-## プロモーション
-
- * テンプレート: [DevAid]( http://themes.3rdwavemedia.com/website-templates/devaid-free-bootstrap-theme-developers/)
-
-## プラットフォームごとの作りこみ
-
- * Mac: メニュー
- * Ubuntus: 調査
 
 ## その他
 
