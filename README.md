@@ -14,23 +14,8 @@ markitはWindows、Macで動作します。
 
 目下開発中です…
 
-***
+## コミットメッセージルール
 
-# todo
-
-## 色設定
-
-## フォント設定
-
-## Markdownプレビュー
-
- * md2reactを使う
-
-## ズーム
-
-## その他
-
- * autoResize時のブレ
-
- * [15604:0505/014225:ERROR:ipc_channel_win.cc(512)] pipe error: 232 のログ
-  https://github.com/electron/electron/issues/3078 では「harmless warning」って言ってるが、ホント？
+```
+$ git config --local commit.template .gitmessage.txt
+```
