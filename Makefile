@@ -4,7 +4,7 @@ build:
 
 .PHONY: install
 install:
-	make
+	npm install
 
 .PHONY: run
 run:

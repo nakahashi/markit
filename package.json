@@ -33,6 +33,7 @@
     "del": "^2.2.1",
     "electron-connect": "^0.4.2",
     "electron-packager": "^7.3.0",
+    "eslint": "^5.8.0",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.2",
     "gulp-plumber": "^1.0.1",
@@ -44,13 +45,13 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "dependencies": {
-    "electron-prebuilt": "^1.2.7",
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1",
+    "chokidar": "^1.7.0",
+    "electron-json-storage": "^2.1.1",
+    "electron-localshortcut": "^0.6.1",
+    "electron-prebuilt": "^1.4.13",
+    "react": "^15.6.2",
     "react-bootstrap": "^0.29.5",
-    "electron-json-storage": "^2.0.0",
-    "electron-localshortcut": "^0.6.0",
-    "chokidar": "^1.4.3",
-    "sprintf-js": "^1.0.3"
+    "react-dom": "^15.6.2",
+    "sprintf-js": "^1.1.1"
   }
 }
