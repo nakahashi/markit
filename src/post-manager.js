@@ -7,9 +7,6 @@ import fs from 'fs';
 const BrowserWindow = electron.BrowserWindow;
 const sprintf = sprintfjs.sprintf;
 
-const PostsFolder = path.resolve(path.join(__dirname, '../posts'));
-const DEFAULT_FOLDER = PostsFolder;
-
 var _windows = [];
 
 class _Instance {
@@ -31,7 +28,7 @@ export default class PostManager {
       all[file] = Object.assign(new _Instance(), status.posts[file]);
     }
 
-    this.folder = status.folder ? status.folder : DEFAULT_FOLDER;
+    this.folder = path.resolve(path.join(__dirname, '../posts'));
     this.all = all;
 
     _openAll(this);
