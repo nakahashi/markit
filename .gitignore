@@ -1,6 +1,10 @@
 # プロジェクト固有
 lib
 posts
+dist
+
+# エディタ
+.vscode
 
 # Created by https://www.gitignore.io/api/linux,windows,osx,node
 

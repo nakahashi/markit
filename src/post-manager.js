@@ -7,7 +7,9 @@ import fs from 'fs';
 const BrowserWindow = electron.BrowserWindow;
 const sprintf = sprintfjs.sprintf;
 
-const PostsFolder = path.resolve(path.join(__dirname, '../posts'));
+// const PostsFolder = path.resolve(path.join(__dirname, './posts'));
+// const PostsFolder = 'file://' + __dirname + "../posts";
+const PostsFolder = '~/work/markit/posts';
 const DEFAULT_FOLDER = PostsFolder;
 
 var _windows = [];
