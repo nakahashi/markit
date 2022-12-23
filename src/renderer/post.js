@@ -84,10 +84,7 @@ class Post extends React.Component {
   }
 
   handleRemove(event) {
-    fs.unlink(this.path, (err) => {
-      if (err) { throw new Error(err); }
-    });
-
+    ipcRenderer.send('remove-post', this.path);
     remote.getCurrentWindow().close();
   }
 

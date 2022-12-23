@@ -15,7 +15,7 @@ const ipcMain = electron.ipcMain;
 
 const STATUS_FILE = path.join(app.getPath('userData'), './status.json');
 
-const _post = new PostManager();
+const _postManager = new PostManager();
 let _watcher = null;
 
 app.on('ready', () => {
@@ -27,7 +27,14 @@ app.on('ready', () => {
     status = {};
   }
 
-  _post.start(status);
+  status.folder = path.resolve(path.join(__dirname, '../posts'));
+  try {
+    fs.accessSync(`${status.folder}/trash`);
+  } catch (err) {
+    fs.mkdirSync(`${status.folder}/trash`);
+  }
+
+  _postManager.start(status);
 
   if (process.platform === 'darwin') {
     _createMenu();
@@ -35,18 +42,22 @@ app.on('ready', () => {
     _createTrayMenu();
   }
 
-  _watcher = chokidar.watch(_post.folder, {ignoreInitial: true});
-  _watcher.on('add', _post.open.bind(_post));
+  _watcher = chokidar.watch(_postManager.folder, {ignoreInitial: true});
+  _watcher.on('add', _postManager.open.bind(_postManager));
 });
 
 app.on('before-quit', (event) => {
-  const status = _post.stop();
+  const status = _postManager.stop();
   fs.writeFileSync(STATUS_FILE, JSON.stringify(status, null, '  '));
 });
 
 app.on('window-all-closed', () => {});
 
-ipcMain.on('add-post', () => _post.add());
+ipcMain.on('add-post', () => _postManager.add());
+
+ipcMain.on('remove-post', (_e, fullPath) => {
+  _postManager.remove(fullPath)
+});
 
 function _createMenu() {
   const menuTemplate = [
@@ -62,13 +73,13 @@ function _createMenu() {
           if (directories && directories[0]) {
             _watcher.close();
 
-            _post.changeFolder(directories[0]);
-            _watcher = chokidar.watch(_post.folder, {ignoreInitial: true});
-            _watcher.on('add', _post.open.bind(_post));
+            _postManager.changeFolder(directories[0]);
+            _watcher = chokidar.watch(_postManager.folder, {ignoreInitial: true});
+            _watcher.on('add', _postManager.open.bind(_postManager));
           }
         }},
         { label: '付箋フォルダを開く', click: ()=> {
-          shell.openItem(_post.folder);
+          shell.openItem(_postManager.folder);
         }},
         { label: '終了', accelerator: 'Cmd+Q', click: app.quit }
       ]
@@ -76,7 +87,7 @@ function _createMenu() {
     {
       label: 'ファイル',
       submenu: [
-        { label: '新しい付箋', accelerator: 'Cmd+N', click: _post.add.bind(_post) }
+        { label: '新しい付箋', accelerator: 'Cmd+N', click: _postManager.add.bind(_postManager) }
       ]
     },
     {
@@ -112,7 +123,7 @@ function _createMenu() {
 
 function _createTrayMenu() {
   const menuTemplate = [
-    { label: '新しい付箋', click: _post.add.bind(_post) },
+    { label: '新しい付箋', click: _postManager.add.bind(_postManager) },
     { label: '付箋フォルダ指定...', click: ()=> {
       const options = {
         title: '付箋フォルダを選択してください。',
@@ -122,13 +133,13 @@ function _createTrayMenu() {
       if (directories && directories[0]) {
         _watcher.close();
 
-        _post.changeFolder(directories[0]);
-        _watcher = chokidar.watch(_post.folder, {ignoreInitial: true});
-        _watcher.on('add', _post.open.bind(_post));
+        _postManager.changeFolder(directories[0]);
+        _watcher = chokidar.watch(_postManager.folder, {ignoreInitial: true});
+        _watcher.on('add', _postManager.open.bind(_postManager));
       }
     }},
     { label: '付箋フォルダを開く', click: ()=> {
-      shell.openItem(_post.folder);
+      shell.openItem(_postManager.folder);
     }},
     { label: '終了', click: app.quit }
   ];

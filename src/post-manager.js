@@ -33,7 +33,7 @@ export default class PostManager {
       all[file] = Object.assign(new _Instance(), status.posts[file]);
     }
 
-    this.folder = status.folder ? status.folder : DEFAULT_FOLDER;
+    this.folder = status.folder;
     this.all = all;
 
     _openAll(this);
@@ -130,6 +130,11 @@ export default class PostManager {
   add() {
     const fullPath = _getNewFullPath(this.folder);
     fs.writeFileSync(fullPath, "");
+  }
+
+  remove(fullpath) {
+    const trashedFilename = `${path.dirname(fullpath)}/trash/${path.basename(fullpath)}`;
+    fs.renameSync(fullpath, trashedFilename);
   }
 }
 
