@@ -1,3 +1,10 @@
+export
+NODE_OPTIONS := --openssl-legacy-provider
+
+.PHONY: install
+install:
+	npm install
+
 .PHONY: build
 build:
 	npx webpack --config webpack.prod.js
@@ -9,10 +16,7 @@ dev:
 .PHONY: clean
 clean:
 	rm -rf ./dist
-
-.PHONY: install
-install:
-	npm install
+	rm -rf ./nodemodules
 
 .PHONY: run
 run:
