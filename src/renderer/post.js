@@ -1,5 +1,5 @@
 import {ipcRenderer, remote} from 'electron';
-import {Grid, Row, Col} from 'react-bootstrap';
+import {Container, Row, Col} from 'react-bootstrap';
 import fs from 'fs';
 import chokidar from 'chokidar';
 import React from 'react';
@@ -96,7 +96,7 @@ class Post extends React.Component {
 
     return (
       <div className="post fix-height">
-        <Grid><Row><div className="header fix-width">
+        <Container><Row><div className="header fix-width">
           <Col xs={6}>
             <span className="fa fa-plus header-button dragholl"
               onClick={::this.handlePlus}
@@ -107,7 +107,7 @@ class Post extends React.Component {
               onClick={::this.handleRemove}
             />
           </div></Col>
-        </div></Row></Grid>
+        </div></Row></Container>
         <div className="body fix-height">
           <textarea id="editor" className="fix-width fix-height"
             style={textareaStyle}
